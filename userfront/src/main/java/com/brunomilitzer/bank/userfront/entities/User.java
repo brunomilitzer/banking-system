@@ -1,8 +1,12 @@
 package com.brunomilitzer.bank.userfront.entities;
 
+import com.brunomilitzer.bank.userfront.entities.security.Authority;
+import com.brunomilitzer.bank.userfront.entities.security.UserRole;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.io.Serializable;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,9 +16,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class User implements Serializable {
+public class User implements UserDetails {
 
     private static final long serialVersionUID = -8898303963582845906L;
 
@@ -32,7 +38,7 @@ public class User implements Serializable {
     private String email;
     private String phone;
 
-    private Boolean enabled;
+    private boolean enabled = true;
 
     @OneToOne
     private PrimaryAccount primaryAccount;
@@ -47,6 +53,10 @@ public class User implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Recipient> recipients;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<UserRole> userRoles = new HashSet<>();
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -108,14 +118,6 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
-    public Boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
     public PrimaryAccount getPrimaryAccount() {
         return primaryAccount;
     }
@@ -146,6 +148,46 @@ public class User implements Serializable {
 
     public void setRecipients(List<Recipient> recipients) {
         this.recipients = recipients;
+    }
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        Set<GrantedAuthority> authorities = new HashSet<>();
+        userRoles.forEach(userRole -> authorities.add(new Authority(userRole.getRole().getName())));
+
+        return authorities;
     }
 
     @Override
