@@ -1,9 +1,12 @@
 package com.brunomilitzer.bank.userfront.controllers;
 
 import com.brunomilitzer.bank.userfront.dao.RoleDAO;
+import com.brunomilitzer.bank.userfront.entities.PrimaryAccount;
+import com.brunomilitzer.bank.userfront.entities.SavingsAccount;
 import com.brunomilitzer.bank.userfront.entities.User;
 import com.brunomilitzer.bank.userfront.entities.security.UserRole;
 import com.brunomilitzer.bank.userfront.services.UserServiceImpl.UserService;
+import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +68,17 @@ public class HomeController {
         }
 
         return "redirect:/";
+    }
+
+    @RequestMapping("/userFront")
+    public String userFront(Principal principal, Model model) {
+        User user = userService.findByUsername(principal.getName());
+        PrimaryAccount primaryAccount = user.getPrimaryAccount();
+        SavingsAccount savingsAccount = user.getSavingsAccount();
+
+        model.addAttribute("primaryAccount", primaryAccount);
+        model.addAttribute("savingsAccount", savingsAccount);
+
+        return "userFront";
     }
 }
