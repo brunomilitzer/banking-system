@@ -1,4 +1,4 @@
-package com.brunomilitzer.bank.userfront.services.UserServiceImpl;
+package com.brunomilitzer.bank.userfront.services;
 
 import com.brunomilitzer.bank.userfront.entities.User;
 import com.brunomilitzer.bank.userfront.entities.security.UserRole;
@@ -19,4 +19,6 @@ public interface UserService {
     boolean checkEmailExists(String email);
 
     boolean checkUsernameExists(String username);
+
+    User saveUser(User user);
 }

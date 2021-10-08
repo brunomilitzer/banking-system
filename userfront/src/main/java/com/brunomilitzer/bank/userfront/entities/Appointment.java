@@ -20,7 +20,7 @@ public class Appointment implements Serializable {
     private Date date;
     private String location;
     private String description;
-    private Boolean confirmed;
+    private boolean confirmed;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -62,11 +62,11 @@ public class Appointment implements Serializable {
         this.description = description;
     }
 
-    public Boolean getConfirmed() {
+    public boolean getConfirmed() {
         return confirmed;
     }
 
-    public void setConfirmed(Boolean confirmed) {
+    public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
     }
 

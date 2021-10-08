@@ -5,6 +5,7 @@ import com.brunomilitzer.bank.userfront.dao.UserDAO;
 import com.brunomilitzer.bank.userfront.entities.User;
 import com.brunomilitzer.bank.userfront.entities.security.UserRole;
 import com.brunomilitzer.bank.userfront.services.AccountService;
+import com.brunomilitzer.bank.userfront.services.UserService;
 import java.util.Set;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
@@ -82,5 +83,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean checkUsernameExists(String username) {
         return findByUsername(username) != null;
+    }
+
+    @Override
+    public User saveUser(User user) {
+        return userDAO.save(user);
     }
 }

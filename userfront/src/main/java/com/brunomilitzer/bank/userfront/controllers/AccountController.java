@@ -7,7 +7,7 @@ import com.brunomilitzer.bank.userfront.entities.SavingsTransaction;
 import com.brunomilitzer.bank.userfront.entities.User;
 import com.brunomilitzer.bank.userfront.services.AccountService;
 import com.brunomilitzer.bank.userfront.services.TransactionService;
-import com.brunomilitzer.bank.userfront.services.UserServiceImpl.UserService;
+import com.brunomilitzer.bank.userfront.services.UserService;
 import java.security.Principal;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;

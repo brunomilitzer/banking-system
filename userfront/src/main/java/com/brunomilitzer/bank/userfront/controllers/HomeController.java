@@ -5,7 +5,7 @@ import com.brunomilitzer.bank.userfront.entities.PrimaryAccount;
 import com.brunomilitzer.bank.userfront.entities.SavingsAccount;
 import com.brunomilitzer.bank.userfront.entities.User;
 import com.brunomilitzer.bank.userfront.entities.security.UserRole;
-import com.brunomilitzer.bank.userfront.services.UserServiceImpl.UserService;
+import com.brunomilitzer.bank.userfront.services.UserService;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.Set;

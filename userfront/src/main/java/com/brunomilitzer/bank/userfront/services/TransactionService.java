@@ -1,7 +1,11 @@
 package com.brunomilitzer.bank.userfront.services;
 
+import com.brunomilitzer.bank.userfront.entities.PrimaryAccount;
 import com.brunomilitzer.bank.userfront.entities.PrimaryTransaction;
+import com.brunomilitzer.bank.userfront.entities.Recipient;
+import com.brunomilitzer.bank.userfront.entities.SavingsAccount;
 import com.brunomilitzer.bank.userfront.entities.SavingsTransaction;
+import java.security.Principal;
 import java.util.List;
 
 public interface TransactionService {
@@ -12,4 +16,14 @@ public interface TransactionService {
     void saveSavingsDepositTransaction(SavingsTransaction savingsTransaction);
     void savePrimaryWithdrawTransaction(PrimaryTransaction primaryTransaction);
     void saveSavingsWithdrawTransaction(SavingsTransaction savingsTransaction);
+    void betweenAccountsTransfer(String transferFrom, String transferTo, String amount,
+                                 PrimaryAccount primaryAccount, SavingsAccount savingsAccount) throws Exception;
+
+    List<Recipient> findRecipientList(Principal principal);
+    Recipient saveRecipient(Recipient recipient);
+    Recipient findRecipientByName(String recipientName);
+
+    void deleteRecipientByName(String recipientName);
+    void toSomeoneElseTransfer(Recipient recipient, String accountType, String amount, PrimaryAccount primaryAccount,
+                               SavingsAccount savingsAccount);
 }

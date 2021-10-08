@@ -1,15 +1,15 @@
-package com.brunomilitzer.bank.userfront.services;
+package com.brunomilitzer.bank.userfront.services.UserServiceImpl;
 
 import com.brunomilitzer.bank.userfront.dao.PrimaryAccountDAO;
-import com.brunomilitzer.bank.userfront.dao.PrimaryTransactionDAO;
 import com.brunomilitzer.bank.userfront.dao.SavingsAccountDAO;
-import com.brunomilitzer.bank.userfront.dao.SavingsTransactionDAO;
 import com.brunomilitzer.bank.userfront.entities.PrimaryAccount;
 import com.brunomilitzer.bank.userfront.entities.PrimaryTransaction;
 import com.brunomilitzer.bank.userfront.entities.SavingsAccount;
 import com.brunomilitzer.bank.userfront.entities.SavingsTransaction;
 import com.brunomilitzer.bank.userfront.entities.User;
-import com.brunomilitzer.bank.userfront.services.UserServiceImpl.UserService;
+import com.brunomilitzer.bank.userfront.services.AccountService;
+import com.brunomilitzer.bank.userfront.services.TransactionService;
+import com.brunomilitzer.bank.userfront.services.UserService;
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.Date;
