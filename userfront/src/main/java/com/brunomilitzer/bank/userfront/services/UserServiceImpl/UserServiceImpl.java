@@ -6,6 +6,7 @@ import com.brunomilitzer.bank.userfront.entities.User;
 import com.brunomilitzer.bank.userfront.entities.security.UserRole;
 import com.brunomilitzer.bank.userfront.services.AccountService;
 import com.brunomilitzer.bank.userfront.services.UserService;
+import java.util.List;
 import java.util.Set;
 import javax.transaction.Transactional;
 import org.slf4j.Logger;
@@ -88,5 +89,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public User saveUser(User user) {
         return userDAO.save(user);
+    }
+
+    @Override
+    public List<User> findUserList() {
+        return userDAO.findAll();
+    }
+
+    @Override
+    public void enableUser(String username) {
+        User user = findByUsername(username);
+        user.setEnabled(true);
+        userDAO.save(user);
+    }
+
+    @Override
+    public void disableUser(String username) {
+        User user = findByUsername(username);
+        user.setEnabled(false);
+        System.out.println(user.isEnabled());
+        userDAO.save(user);
+        System.out.println(username + " is disabled");
     }
 }

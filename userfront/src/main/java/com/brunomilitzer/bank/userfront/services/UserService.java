@@ -2,6 +2,7 @@ package com.brunomilitzer.bank.userfront.services;
 
 import com.brunomilitzer.bank.userfront.entities.User;
 import com.brunomilitzer.bank.userfront.entities.security.UserRole;
+import java.util.List;
 import java.util.Set;
 
 public interface UserService {
@@ -21,4 +22,10 @@ public interface UserService {
     boolean checkUsernameExists(String username);
 
     User saveUser(User user);
+
+    List<User> findUserList();
+
+    void enableUser(String username);
+
+    void disableUser(String username);
 }
